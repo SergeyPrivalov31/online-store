@@ -21,13 +21,31 @@ class DeviceController {
 
     }
     async getAll (req, res) {
-        const devices = await Device.findAll()
+        const {brandId, typeId} = req.query
+
+        let devices;
+
+        if (!brandId && !typeId) {
+            devices = await Device.findAll()
+        }
+
+        if (brandId && !typeId) {
+            devices = await Device.findAll({ where: { brandId }})//указываем где искать, по каким полям
+        }
+
+        if (!brandId && typeId) {
+            devices = await Device.findAll({ where: { typeId }})
+        }
+
+        if (brandId && typeId) {
+            devices = await Device.findAll({ where: { brandId, typeId }})
+        }
+
         return res.json(devices)
+
     }
     async getOne (req, res) {
-        const {id} = req.body
-        const device = await Device.findOne({id})
-        return res.json(device)
+
     }
 }
 module.exports = new DeviceController();
