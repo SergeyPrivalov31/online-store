@@ -1,11 +1,11 @@
-
-import './App.css';
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
 
 const App = () => {
   return (
-    <div className="App">
-      CLIENT
-    </div>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 
