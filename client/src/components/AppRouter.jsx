@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useContext } from 'react';
 import { Routes, Route, Navigate  } from 'react-router-dom';
@@ -9,7 +10,7 @@ import DevicePage from '../pages/DevicePage';
 import Shop from '../pages/Shop';
 import { ADMIN_ROUTE, BASKET_ROUTE, DEVICE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
     const {user} = useContext(Context)
     return (
         <Routes>
@@ -22,10 +23,10 @@ const AppRouter = () => {
             <Route path={DEVICE_ROUTE} element={<DevicePage />} />
             <Route
                 path="*"
-                element={<Navigate to="shop" replace />}
+                element={<Navigate to="/shop" replace />}
             />
         </Routes>
     );
-};
+});
 
 export default AppRouter;
