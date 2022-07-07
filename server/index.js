@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const sequelize = require('./db')
-const models = require('./models/models')
+// const models = require('./models/models')
 const cors = require('cors')
 const fileupload = require('express-fileupload')
 const router = require('./routes/index')
@@ -18,7 +18,6 @@ app.use(fileupload({}))//параметром пустой объект с оп�
 app.use('/api', router)
 //мидлвеар который работаетс ошибками, обязательно должен идти и регистрироваться в самом конце
 app.use(errorHandler)
-
 const start = async() => {
     try {
         await sequelize.authenticate() //устанавливаем подключение с базой данных

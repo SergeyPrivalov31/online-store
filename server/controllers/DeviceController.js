@@ -41,25 +41,19 @@ class DeviceController {
         let offset = page * limit - limit
 
         let devices;
-
         if (!brandId && !typeId) {
             devices = await Device.findAndCountAll({limit, offset})//findAndCountAll -> возвращает общее чисоло объектов
         }
-
         if (brandId && !typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId, limit, offset }})//указываем где искать, по каким полям
+            devices = await Device.findAndCountAll({ where: { brandId }, limit, offset })//where : указываем где искать, по каким полям
         }
-
         if (!brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { typeId, limit, offset}})
+            devices = await Device.findAndCountAll({ where: { typeId }, limit, offset})
         }
-
         if (brandId && typeId) {
-            devices = await Device.findAndCountAll({ where: { brandId, typeId, limit, offset }})
+            devices = await Device.findAndCountAll({ where: { brandId, typeId }, limit, offset })
         }
-
         return res.json(devices)
-
     }
     async getOne (req, res) {
         const {id} = req.params

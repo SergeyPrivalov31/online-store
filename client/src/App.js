@@ -1,12 +1,31 @@
+import { observer } from "mobx-react-lite";
+import { useContext, useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import { Context } from ".";
+import AppRouter from "./components/AppRouter";
+import Navbar from "./components/Navbar";
+import { check } from "./http/userAPI";
 
-import './App.css';
+const App = observer(() => {
+  const {user} = useContext(Context)
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    check().then(data => {
+      user.setUser(data)
+      user.setIsAuth(true)
+    }).finally(() => setLoading(false))
+  },[])
 
-const App = () => {
+  if(loading){
+    return <Spinner animation="grow"/>
+  }
+
   return (
-    <div className="App">
-      CLIENT
-    </div>
+    <>
+      <Navbar />
+      <AppRouter />
+    </>
   );
-}
+});
 
 export default App;
