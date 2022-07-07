@@ -32,6 +32,7 @@ const CreateDevice = observer(({show, onHide}) => {
     }
 
     const addDevice = () => {
+        //как в постман Form Data, а не JSON
         const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)

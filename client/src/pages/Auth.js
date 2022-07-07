@@ -41,7 +41,7 @@ const Auth = observer(() => {
         user.setIsAuth(true)
         navigate(SHOP_ROUTE, { replace: true });
     } catch (e) {
-        alert(e.response.data.message)
+        alert(e)
     }
   } 
   return (
